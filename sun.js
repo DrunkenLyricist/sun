@@ -37,7 +37,7 @@ const generateHtml = (data) => {
 
   // Display the result in the element with id="demo"
   document.getElementById("owntimer").innerHTML = hours + ":"
-  + minutes + ":"+ seconds;
+  + minutes;
 
   // If the count down is finished, update to the next 24 hours
   if (distance <=0) { //need to catch the exact moment it goes to zero, hence <= not just <
