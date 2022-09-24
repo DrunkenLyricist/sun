@@ -56,10 +56,13 @@ const generateHtml = (data) => {
     
     <style>
     body {
-
+      font-family: Atkinson Hyperlegible;
       text-align: center;
       font-size: 250px;
-      margin-top: 0px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      margin-right: 50px;
+      margin-left: 50px;
       color: white;
       background-color: black;
     }
