@@ -1,5 +1,5 @@
 const apiData = {
-    url: 'https://fcc-weather-api.glitch.me/api/current?lat=30.91&lon=75.34',
+    url: 'https://fcc-weather-api.glitch.me/api/current?lat=30.91&lon=75.34&weather[0].icon',
 }
 const apiUrl = `${apiData.url}`
 console.log(apiUrl)
@@ -18,35 +18,65 @@ const generateHtml = (data) => {
   var date = new Date(unixTimestamp1 * 1000);
   var final1 = (date.toLocaleTimeString("it-IT")); /////////////
 
-  var countDownDate = data.sys.sunset;
+  var sunset = data.sys.sunset
+  var sunrise = data.sys.sunrise
+  var nowTime = Math.floor(new Date().getTime()/1000.0)
+  
+  if (nowTime < sunset){
 
-// Update the count down every 1 second
-  var x = setInterval(function() {
+    // Set the date we're counting down to
+    var countDownDate = data.sys.sunset
+    
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+    
+      // Get today's date and time
+      var now = Math.floor(new Date().getTime()/1000.0)
+      console.log(now)
 
-  // Get today's date and time
-  var now = new Date().getTime();
+      
+      var distance = countDownDate - now;
+    
+      var days = Math.floor(distance / (60 * 60 * 24));
+      var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+      var minutes = Math.floor((distance % (60 * 60)) / (60));
+      var seconds = Math.floor((distance % (60)));
+    
+      // Display the result in the element with id="demo"
+      document.getElementById("demo").innerHTML = hours + ":"
+      + minutes + ":" + seconds;
 
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Display the result in the element with id="demo"
-  document.getElementById("owntimer").innerHTML = hours + ":"
-  + minutes;
-
-  // If the count down is finished, update to the next 24 hours
-  if (distance <=0) { //need to catch the exact moment it goes to zero, hence <= not just <
-    //clearInterval(x); //don't clear the interval, we want to carry on ticking away
-    //document.getElementById("owntimer").innerHTML = "EXPIRED"; // this was just for debugging
-    countDownDate = countDownDate + (24 * 60 * 60 * 1000);
+    }, 1000);
   }
-}, 1000);
+  if (nowTime > sunset){
+      tomSunrise = sunrise + 24*60*60
+      var tomorrow = Math.floor(sunrise + 84600 + 1800) 
+      console.log(tomorrow)
+      
+      // Set the date we're counting down to
+      var countDownDate = tomSunrise
+    
+    // Update the count down every 1 second
+      var x = setInterval(function() {
+    
+      // Get today's date and time
+      var now = Math.floor(new Date().getTime()/1000.0)
+      console.log(now)
+      
+      var distance = countDownDate - now;
+    
+      var days = Math.floor(distance / (60 * 60 * 24));
+      var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+      var minutes = Math.floor((distance % (60 * 60)) / (60));
+      var seconds = Math.floor((distance % (60)));
+    
+      // Display the result in the element with id="demo"
+      document.getElementById("demo").innerHTML = "-" + hours + ":"
+      + minutes + ":" + seconds;
 
+    }, 1000);
+
+    }
 
   const html = `
     <div class = "sunrise">🌞</div>
@@ -68,7 +98,7 @@ const generateHtml = (data) => {
     }
     </style>
     <div class = "sunrise">🤰</div>
-    <div id="owntimer"></div>
+    <div id="demo"></div>
 
   `
   const pokemonDiv = document.querySelector('.pokemon')
