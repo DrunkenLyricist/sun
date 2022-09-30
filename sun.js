@@ -86,7 +86,7 @@ const generateHtml = (data) => {
     
     <style>
     body {
-      font-family: Roboto Mono;
+      font-family: Atkinson Hyperlegible;
       text-align: center;
       font-size: 250px;
       margin-top: 100px;
