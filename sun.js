@@ -48,7 +48,7 @@ const generateHtml = (data) => {
 
     }, 1000);
   }
-  if (nowTime > sunset){
+  else if (nowTime > sunset){
       tomSunrise = sunrise + 24*60*60
       var tomorrow = Math.floor(sunrise + 84600 + 1800) 
       console.log(tomorrow)
