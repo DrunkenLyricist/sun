@@ -22,7 +22,7 @@ var sunset = data.sys.sunset
 var sunrise = data.sys.sunrise
 var nowTime = Math.floor(new Date().getTime()/1000.0)
 
-if (nowTime < sunset){
+if (nowTime < sunset && nowTime > sunrise){
 
   // Set the date we're counting down to
   var countDownDate = data.sys.sunset
@@ -49,7 +49,7 @@ if (nowTime < sunset){
 
   }, 1000);
 }
-else if(nowTime > sunset){
+else {
     var tomorrow = Math.floor(sunrise + 84600 + 1800) 
     console.log(tomorrow)
     
@@ -74,8 +74,8 @@ else if(nowTime > sunset){
     document.getElementById("demo").innerHTML = "-" + hours + ":"
     + minutes + ":" + seconds;
     var nowTime = Math.floor(new Date().getTime()/1000.0)
-
   }, 1000);
+  
   }
 
 const html = `
