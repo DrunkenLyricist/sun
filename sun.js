@@ -45,11 +45,37 @@ if (nowTime < sunset && nowTime > sunrise){
     // Display the result in the element with id="demo"
     document.getElementById("demo").innerHTML = hours + ":"
     + minutes + ":" + seconds;
-    var nowTime = Math.floor(new Date().getTime()/1000.0)
+    var nowTime = Math.floor(new Date().getTime()/1000.0);
 
   }, 1000);
 }
-else {
+else if (nowTime < sunrise){
+
+  // Set the date we're counting down to
+  var countDownDate = data.sys.sunrise
+  
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get today's date and time
+    var now = Math.floor(new Date().getTime()/1000.0)
+    console.log(now)
+
+    var distance = countDownDate - now;
+  
+    var days = Math.floor(distance / (60 * 60 * 24));
+    var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+    var minutes = Math.floor((distance % (60 * 60)) / (60));
+    var seconds = Math.floor((distance % (60)));
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("demo").innerHTML = hours + ":"
+    + minutes + ":" + seconds;
+    var nowTime = Math.floor(new Date().getTime()/1000.0);
+
+  }, 1000);
+}
+else if (nowTime > sunset){
     var tomorrow = Math.floor(sunrise + 84600 + 1800) 
     console.log(tomorrow)
     
@@ -75,8 +101,7 @@ else {
     + minutes + ":" + seconds;
     var nowTime = Math.floor(new Date().getTime()/1000.0)
   }, 1000);
-  
-  }
+}
 
 const html = `
   <div class = "sunrise">🌞</div>
