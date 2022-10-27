@@ -97,7 +97,7 @@ else if (nowTime < sunrise){
     var seconds = Math.floor((distance % (60)));
   
     // Display the result in the element with id="demo"
-    document.getElementById("demo").innerHTML = hours + ":"
+    document.getElementById("demo").innerHTML = "-" + hours + ":"
     + minutes + ":" + seconds;
     var nowTime = Math.floor(new Date().getTime()/1000.0);
 
